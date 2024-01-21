@@ -4,11 +4,21 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { UserProvider } from './context/userProvider';
+import { BlogProvider } from './context/blogProvider';
+import { CommentProvider } from './context/CommentProvider';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  
+  <UserProvider>
+    <BlogProvider>
+    <CommentProvider>
+      <App /> 
+    </CommentProvider>
+    </BlogProvider>
+  </UserProvider>
+
 );
 
 // If you want to start measuring performance in your app, pass a function
