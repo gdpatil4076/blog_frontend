@@ -16,7 +16,9 @@ const BlogInfoComponent = (props) => {
     const {blogComment , SetBlog} = props;
 
     useEffect(()=>{
+      
         const id = localStorage.getItem('blogId');
+
         const  immediate = async () => {
           try{
 
@@ -34,7 +36,6 @@ const BlogInfoComponent = (props) => {
               // console.log("Comments are ",comments);
     
               localStorage.setItem('blogId' , id);
-    
     
             }
             else{

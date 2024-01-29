@@ -1,6 +1,6 @@
 import React, { useState,useContext } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import UserContext from '../context/userProvider';
 import {url} from './const';
 
@@ -31,14 +31,13 @@ export default function Signin ()  {
     try {
 
         const response = await axios.post(url+`/user/signin`, formData);
-
+        
         if (response.status === 200) {
           console.log(response.data);
           alert(`Welcome :  ${response.data.name}`);
           loginUser(response.data);
           navigate("/");
           // User comes at frontend // create context here
-          
           
         } else {
           console.error('Form submission failed');

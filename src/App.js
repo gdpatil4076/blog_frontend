@@ -19,38 +19,23 @@ import axios from "axios"
 import Videocall from './components/Videocalll';
 import Room from './components/Room';
 import SearchResults from './components/SearchResults';
+import {url} from './components/const'
 
 function App() {
 
   const [Blog , SetBlog] = useState(null); 
-  const { user, loginUser, logoutUser } = useContext(UserContext); // user context  
-  const { setBlogsState } = useContext(BlogContext); // blog context
-
-
-  useEffect(()=>{ 
-    const reqFun=async()=>{
-      try {
-        const response = await axios.get("/b");
-        setBlogsState(response.data);
-      } catch (error) {  
-        console.log(error);
-      }
-    }
-    reqFun();
-  },[]);
-
 
 
   return (
 
     <Router>
-      <Navbar user={user} logoutUser={logoutUser} /> 
+      <Navbar /> 
       <Routes>
         {/* User Routes */}
         {/* <Route path="/user" exact component={User} />
         <Route path="/user/profile" component={UserProfile} /> */}
 
-        <Route path="/" element={< Home SetBlog={SetBlog} />}/> 
+        <Route path="/" element={< Home />}/> 
         <Route path="/user/signup" element={<Signup/>}/>
         <Route path="/livechat" element={<ChatComponent/>}/>
         <Route path="/user/signin" element={<Signin/>} /> 

@@ -1,3 +1,2 @@
-let url = "https://gaurav7709api.azurewebsites.net/"
-
+let url = "https://blogapi-wn9d.onrender.com"
 export {url}

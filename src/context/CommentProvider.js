@@ -1,6 +1,5 @@
 // CommentContext.js
 import React, { createContext,  useState } from 'react';
-import {url} from '../components/const';
 const CommentContext = createContext();
 
 

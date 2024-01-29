@@ -26,8 +26,9 @@ const CommentForm = (props) => {
     try {
 
       // backend modification
-      const apiUrl = `/blog/comment/${id}`;
-      const response = await axios.post(url+apiUrl, { comment });
+      const apiUrl = url+`/blog/comment/${id}`;
+
+      const response = await axios.post(apiUrl, { comment });
 
       if (response.status === 200) {
         addComment(response.data.comet);

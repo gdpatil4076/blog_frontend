@@ -14,7 +14,7 @@ export const BlogProvider = ({ children }) => {
     useEffect(() => {
         // Load user information from localStorage on component mount
         console.log("Fetching Blogs From Database");
-        const reqFun=async()=>{
+        const reqFun = async()=>{
             try {
               const response = await axios.get(url+`/b`);
               // console.log("Response is => " , response.data); 
@@ -51,7 +51,7 @@ export const BlogProvider = ({ children }) => {
 
         //backend updation
         try {
-
+            // console.log(url+`/blog/addlike/${blogId}`);
             const response = await axios.get(url+`/blog/addlike/${blogId}`);
             if (response.status === 200) {
                 // alert(`${response.data.msg}`);

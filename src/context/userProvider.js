@@ -1,54 +1,47 @@
 import React from "react";
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
-import {url} from '../components/const';
+import { url } from "../components/const";
 
 const UserContext = createContext();
-
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    // Load user information from localStorage on component mount
-    const storedUser = localStorage.getItem("user");
-    const nuser = JSON.parse(storedUser);
-
-    if (storedUser) {
-      console.log("Fetching User From Database");
-
-      const reqFun = async () => {
-        try {
-          const response = await axios.get(url+`/user/getuser`);
-
-          if (response.status === 200) {
-            // console.log("Response is" ,response.data.msg);
-            setUser(response.data.msg);
-            localStorage.setItem("user", JSON.stringify(response.data.msg));
-          } else {
-            console.log("Unknown Error");
-          }
-        } catch (error) {
-          console.log(error);
+  useEffect(()=>{
+      try{
+        const luser = JSON.parse(localStorage.getItem("user"));
+        if (!luser) {
+          setUser(null);
         }
-      };
-      reqFun();
-    }
-  }, []);
+        setUser(luser);
+      }
+      catch(error){
+        console.log(error);
+      }
+  },[])
 
   const loginUser = (userData) => {
     // Logic to handle user login
-
     // frontend modification
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData));
-
     //backend modification
   };
 
-  const logoutUser = () => {
+  const logoutUser = async () => {
     setUser(null);
     localStorage.removeItem("user");
+    await axios.get(url+`/user/logout`);
   };
+
+  const getUser = ()=>{
+    try{
+      return JSON.parse(localStorage.getItem("user"));
+    }catch(e)
+    {
+      return null;
+    }
+ }
 
   const UpdateUser = (blogId) => {
     try {
@@ -75,7 +68,7 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, loginUser, logoutUser, UpdateUser }}>
+    <UserContext.Provider value={{ user, loginUser, logoutUser, UpdateUser,getUser }}>
       {children}
     </UserContext.Provider>
   );

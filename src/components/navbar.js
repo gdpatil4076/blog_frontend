@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import UserContext from '../context/userProvider';
 
 
-export default function navbar (props)  {
+export default function Navbar (props)  {
 
-
-  const {user , logoutUser} = props;
+  const {logoutUser,getUser} = useContext(UserContext);
+  const user = getUser();
 
   return (
     <div>

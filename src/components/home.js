@@ -1,19 +1,33 @@
 import React from 'react'
-import {useContext } from 'react';
+import {useContext,useEffect } from 'react';
 import BlogContext from '../context/blogProvider';
 import UserContext from '../context/userProvider';
-import { Link } from "react-router-dom";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import CommentContext  from '../context/CommentProvider';
+
 import {url} from './const';
 
 const Home = (props) => {
 
+  const { updateLikes,blogs,setBlogsState } = useContext(BlogContext); // blog context
+
+  useEffect(()=>{ 
+    const reqFun=async()=>{
+      try {
+        const response = await axios.get(url+`/b`);
+        console.log(url);
+        setBlogsState(response.data);
+      } catch (error) {  
+        console.log(error);
+      }
+    }
+    reqFun();
+  },[]);
+
   const { setAllComments, comments } = useContext(CommentContext);
   const Navigate = useNavigate();
-  const {SetBlog} = props;
-  const { updateLikes,blogs } = useContext(BlogContext); // blog context
+
   const {user}  = useContext(UserContext);
 
   const handleFullView = async (BlogId) => {
@@ -24,7 +38,6 @@ const Home = (props) => {
         if (response.status === 200){
 
           console.log("At frontend ",response.data.msg);
-          SetBlog(response.data.msg);
           // Set commments under context 
           setAllComments(response.data.msg.comment);
           // console.log("Comments are ",comments);
@@ -48,15 +61,11 @@ const Home = (props) => {
   }
 
   return (
-
     
-
-
     <div className="container mt-4 ">
 
     <div className="row ">
       {blogs && blogs.map((blog) => (
-
 
         <div key={blog._id} className="col-md-4 col-sm-6 mb-4 d-flex justify-content-center">
 
