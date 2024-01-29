@@ -30,7 +30,7 @@ export default function Signin ()  {
 
     try {
 
-        const response = await axios.post(url+`/user/signin`, formData);
+        const response = await axios.post(url+`/user/signin`, formData , {withCredentials : true});  
         
         if (response.status === 200) {
           console.log(response.data);
