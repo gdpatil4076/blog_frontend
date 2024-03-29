@@ -1,2 +1,2 @@
-let url = "https://blogapi-wn9d.onrender.com"
+let url = "https://mernblogs.onrender.com"
 export {url}
