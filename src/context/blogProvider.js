@@ -52,7 +52,15 @@ export const BlogProvider = ({ children }) => {
         //backend updation
         try {
             // console.log(url+`/blog/addlike/${blogId}`);
-            const response = await axios.get(url+`/blog/addlike/${blogId}`);
+            // const response = await axios.get(url+`/blog/addlike/${blogId}`);
+
+            let response = await fetch(
+              url+`/blog/addlike/${blogId}`,
+              {
+                method: "GET",
+                credentials: "include",
+              }
+            );
             if (response.status === 200) {
                 // alert(`${response.data.msg}`);
                 console.log("Like and User Updated at Backend");
