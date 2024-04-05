@@ -30,7 +30,7 @@ const CommentForm = (props) => {
 
       // const response = await axios.post(apiUrl, { comment });
 
-     const reponse = await fetch(apiUrl , {
+     const response = await fetch(apiUrl , {
       method: 'POST',
       body: comment,
       credentials: 'include'
