@@ -28,13 +28,13 @@ const CommentForm = (props) => {
       // backend modification
       const apiUrl = url+`/blog/comment/${id}`;
 
-      // const response = await axios.post(apiUrl, { comment });
+      const response = await axios.post(apiUrl, { comment });
 
-     const response = await fetch(apiUrl , {
-      method: 'POST',
-      body: comment,
-      credentials: 'include'
-    })
+    //  const response = await fetch(apiUrl , {
+    //   method: 'POST',
+    //   body: comment,
+    //   credentials: 'include'
+    // })
 
       if (response.status === 200) {
         addComment(response.data.comet);
